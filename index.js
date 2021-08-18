@@ -8,12 +8,12 @@ const requestListener = function (req, res) {
   res.setHeader("Content-Type", "application/json");
   switch (req.url) {
     case "/books":
-      response.setHeader('Content-Type', 'application/json');
+      res.setHeader('Content-Type', 'application/json');
       res.writeHead(200);
       res.end(books);
       break
     case "/authors":
-      response.setHeader('Content-Type', 'application/json');
+      res.setHeader('Content-Type', 'application/json');
       res.writeHead(200);
       res.end(authors);
       break
