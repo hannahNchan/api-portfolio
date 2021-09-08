@@ -1,0 +1,29 @@
+{
+  "name": "api-portfolio",
+  "version": "1.0.0",
+  "description": "Api for portfolio",
+  "main": "index.js",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "nodemon": "^2.0.12",
+    "sqlite3": "^5.0.2",
+    "url": "^0.11.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "node test",
+    "start": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hannahNchan/api-portfolio.git"
+  },
+  "author": "Hannah noelia narvaez",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hannahNchan/api-portfolio/issues"
+  },
+  "homepage": "https://github.com/hannahNchan/api-portfolio#readme"
+}

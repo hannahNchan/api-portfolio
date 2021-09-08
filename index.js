@@ -1,26 +1,125 @@
-const http = require('http');
-const { books, authors } = require('./src/constants');
+const express = require('express')
+const bodyParser = require('body-parser');
+const cors = require('cors');
+
+const {
+  newDataFromDB,
+  getDataFromDB,
+  deleteDataFromDB,
+  updateDataFromDB,
+} = require('./src/db/index');
+
+const app = express();
+app.use(cors());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
 
 const host = '0.0.0.0';
 const port = 8000;
 
-const requestListener = function (req, res) {
-  res.setHeader("Content-Type", "application/json");
-  switch (req.url) {
-    case "/books":
-      res.setHeader('Content-Type', 'application/json');
-      res.writeHead(200);
-      res.end(books);
-      break
-    case "/authors":
-      res.setHeader('Content-Type', 'application/json');
-      res.writeHead(200);
-      res.end(authors);
-      break
+const messageSuccess = {
+  status: 'ok', 
+  payload: {
+    message: 'Database has been updated succesfully'
   }
-}
+};
 
-const server = http.createServer(requestListener);
-server.listen(port, host, () => {
-  console.log(`Server is running on http://${host}:${port}`);
+const messageFail = {
+  status: 'fail', 
+  payload: {
+    message: 'An error ocurred triyng updated database'
+  }
+};
+
+const parseCareerData = (data) => {
+  const parsedData = data.map(i => {
+    return {
+      date: i.date,
+      content: {
+          id: i.id,
+          title: i.title,
+          subtitle: i.subtitle,
+          description: i.description,
+          activities: i.activities,
+          technologies: i.technologies
+      }
+    }
+  });
+  
+ return JSON.stringify({
+    payload: parsedData
+  })
+};
+
+app.get('/career', (req, res) => {
+  getDataFromDB()
+    .then(path => {
+      res.set({
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+      });
+      const response = parseCareerData(path);
+      res.send(response)
+    })
+});
+
+app.post('/endpoint/set-career/v1/:id', function(req, res, next) {
+  const { id } = req.params;
+  const { title, date, subtitle, description, activities, technologies } = req.body;
+  const params = {
+    id,
+    date,
+    title,
+    subtitle,
+    description,
+    activities,
+    technologies
+  };
+  updateDataFromDB('career', params)
+    .then((response) => {
+      if (response) {
+        res.status(200).json(messageSuccess);
+      } else {
+        res.status(200).json(messageFail);
+      }
+    })
+});
+
+app.post('/endpoint/new-set-career/v1', function(req, res, next) {
+  const { title, date, subtitle, description, activities, technologies } = req.body;
+  const params = {
+    date,
+    title,
+    subtitle,
+    description,
+    activities,
+    technologies
+  };
+  newDataFromDB('career', params)
+    .then((response) => {
+      if (response) {
+        res.status(200).json(messageSuccess);
+      } else {
+        res.status(200).json(messageFail);
+      }
+    })
+
+});
+
+app.get('/endpoint/delete-set-career/v1/:id', function(req, res, next) {
+  const { id } = req.params;
+  deleteDataFromDB('career', id)
+    .then((response) => {
+      if (response) {
+        res.status(200).json(messageSuccess);
+      } else {
+        res.status(200).json(messageFail);
+      }
+    })
+
+});
+
+app.listen(port, () => {
+ console.log(`Server is running on http://${host}:${port}`);
 });
