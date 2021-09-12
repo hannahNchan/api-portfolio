@@ -15,7 +15,7 @@
   "scripts": {
     "test": "node test",
     "start": "NODE_ENV=develop nodemon index.js",
-    "production": "NODE_ENV=production pm2 start index.js"
+    "production": "NODE_ENV=production pm2 start index.js --name 'API'"
   },
   "repository": {
     "type": "git",
