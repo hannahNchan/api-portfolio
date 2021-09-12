@@ -52,7 +52,7 @@ const parseCareerData = (data) => {
   })
 };
 
-app.get('/career', (req, res) => {
+app.get('/endpoint/career', (req, res) => {
   getDataFromDB()
     .then(path => {
       res.set({
