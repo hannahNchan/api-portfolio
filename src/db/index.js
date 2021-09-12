@@ -53,15 +53,16 @@ const newDataFromDB = (table = 'career', params) => {
         var query = `select id from ${table} ORDER BY id DESC LIMIT 1;`;
         db.all(query, (err, rows) => {
           if(err){
-              reject(err);
+            reject(err);
           }else{
-            resolve(rows[0].id);
+            resolve(rows);
           }
         });
       });
     }
 
     getId('career').then(newId => {
+      const id = newId.length === 0 ? 0 : newId[0].id + 1;
       const query = `INSERT INTO career(
         id,
         date,
@@ -71,7 +72,7 @@ const newDataFromDB = (table = 'career', params) => {
         activities,
         technologies)
       VALUES(
-        '${newId + 1}',
+        '${id}',
         '${date}',
         '${title}',
         '${subtitle}',
