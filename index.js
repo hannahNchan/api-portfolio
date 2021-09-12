@@ -14,7 +14,6 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-
 const host = '0.0.0.0';
 const port = 8000;
 
