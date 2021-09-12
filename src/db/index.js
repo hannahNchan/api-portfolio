@@ -9,10 +9,10 @@ const getDataFromDB = (table = 'career') => {
       db.all(`SELECT * FROM ${table}`, (err, row) => {
         if (err) {
           reject(err);
-          closeDB(db).then(console.log)
+          closeDB(db)
         }
         resolve(row);
-          closeDB(db).then(console.log)
+          closeDB(db)
       });
     });
   });
