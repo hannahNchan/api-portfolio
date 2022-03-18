@@ -2,6 +2,8 @@ const express = require('express')
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
+const tableData = require('./src/fakeTable');
+
 const {
   newDataFromDB,
   getDataFromDB,
@@ -51,16 +53,23 @@ const parseCareerData = (data) => {
   })
 };
 
-app.get('/endpoint/career', (req, res) => {
-  getDataFromDB()
-    .then(path => {
-      res.set({
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
-      });
-      const response = parseCareerData(path);
-      res.send(response)
-    })
+app.get('/v1/dataTable/:totalElements?', (req, res) => {
+  const response = {
+    length: null,
+    type: 'comodity',
+    status: 'ok',
+    payload: []
+  };
+  if (req.params.totalElements) {
+    const { totalElements } = req.params;
+    const restTable = tableData.splice(0, totalElements);
+    response.length = restTable.length;
+    response.payload = restTable;
+    return res.send(response);
+  }
+  response.length = tableData.length;
+  response.payload = tableData;
+  return res.send(response);
 });
 
 app.post('/endpoint/set-career/v1/:id', function(req, res, next) {
