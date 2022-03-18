@@ -74,7 +74,7 @@ app.get('/v1/dataTable/:totalElements?', (req, res) => {
   };
   if (req.params.totalElements) {
     const { totalElements } = req.params;
-    const restTable = tableData.splice(0, totalElements);
+    const restTable = tableData.slice(0, totalElements);
     response.length = restTable.length;
     response.payload = restTable;
     return res.send(response);
