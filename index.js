@@ -53,6 +53,18 @@ const parseCareerData = (data) => {
   })
 };
 
+app.get('/endpoint/career', (req, res) => {
+  getDataFromDB()
+    .then(path => {
+      res.set({
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+      });
+      const response = parseCareerData(path);
+      res.send(response)
+    })
+  });
+
 app.get('/v1/dataTable/:totalElements?', (req, res) => {
   const response = {
     length: null,
