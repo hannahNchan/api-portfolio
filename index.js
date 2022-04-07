@@ -70,19 +70,17 @@ app.get('/v1/dataTable/:totalElements?', (req, res) => {
     length: null,
     type: 'comodity',
     status: 'ok',
-    data: {
-      payload: []
-    }
+    payload: []
   };
   if (req.params.totalElements) {
     const {totalElements} = req.params;
     const restTable = tableData.slice(0, totalElements);
     response.length = restTable.length;
-    response.data.payload = restTable;
+    response.payload = restTable;
     return res.send(response);
   }
   response.length = tableData.length;
-  response.data.payload = tableData;
+  response.payload = tableData;
   return res.send(response);
 });
 
