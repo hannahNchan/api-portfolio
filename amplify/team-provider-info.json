@@ -12,12 +12,30 @@
       "AmplifyAppId": "d17rwnivcloq3h"
     },
     "categories": {
-      "auth": {
-        "undefined": {}
-      },
       "function": {
         "hannahPortfolioApiLambda": {
           "deploymentBucketName": "amplify-hannahportfolioapi-dev-212013-deployment",
+          "s3Key": "amplify-builds/hannahPortfolioApiLambda-2f616778526379445151-build.zip"
+        }
+      }
+    }
+  },
+  "prod": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-hannahportfolioapi-prod-183155-authRole",
+      "UnauthRoleArn": "arn:aws:iam::626238570311:role/amplify-hannahportfolioapi-prod-183155-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::626238570311:role/amplify-hannahportfolioapi-prod-183155-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-hannahportfolioapi-prod-183155-deployment",
+      "UnauthRoleName": "amplify-hannahportfolioapi-prod-183155-unauthRole",
+      "StackName": "amplify-hannahportfolioapi-prod-183155",
+      "StackId": "arn:aws:cloudformation:us-east-1:626238570311:stack/amplify-hannahportfolioapi-prod-183155/890bff00-dfa7-11ec-9d4f-12b9e23c7aa5",
+      "AmplifyAppId": "d17rwnivcloq3h"
+    },
+    "categories": {
+      "function": {
+        "hannahPortfolioApiLambda": {
+          "deploymentBucketName": "amplify-hannahportfolioapi-prod-183155-deployment",
           "s3Key": "amplify-builds/hannahPortfolioApiLambda-2f616778526379445151-build.zip"
         }
       }

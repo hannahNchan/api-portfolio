@@ -2,8 +2,6 @@ const express = require('express')
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
-const tableData = require('./src/fakeTable');
-
 const {
   newDataFromDB,
   getDataFromDB,
@@ -13,21 +11,22 @@ const {
 
 const app = express();
 app.use(cors());
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+
 
 const host = '0.0.0.0';
 const port = 8000;
 
 const messageSuccess = {
-  status: 'ok',
+  status: 'ok', 
   payload: {
     message: 'Database has been updated succesfully'
   }
 };
 
 const messageFail = {
-  status: 'fail',
+  status: 'fail', 
   payload: {
     message: 'An error ocurred triyng updated database'
   }
@@ -38,17 +37,17 @@ const parseCareerData = (data) => {
     return {
       date: i.date,
       content: {
-        id: i.id,
-        title: i.title,
-        subtitle: i.subtitle,
-        description: i.description,
-        activities: i.activities,
-        technologies: i.technologies
+          id: i.id,
+          title: i.title,
+          subtitle: i.subtitle,
+          description: i.description,
+          activities: i.activities,
+          technologies: i.technologies
       }
     }
   });
-
-  return JSON.stringify({
+  
+ return JSON.stringify({
     payload: parsedData
   })
 };
@@ -65,28 +64,9 @@ app.get('/endpoint/career', (req, res) => {
     })
 });
 
-app.get('/v1/dataTable/:totalElements?', (req, res) => {
-  const response = {
-    length: null,
-    type: 'comodity',
-    status: 'ok',
-    payload: []
-  };
-  if (req.params.totalElements) {
-    const {totalElements} = req.params;
-    const restTable = tableData.slice(0, totalElements);
-    response.length = restTable.length;
-    response.payload = restTable;
-    return res.send(response);
-  }
-  response.length = tableData.length;
-  response.payload = tableData;
-  return res.send(response);
-});
-
-app.post('/endpoint/set-career/v1/:id', function (req, res, next) {
-  const {id} = req.params;
-  const {title, date, subtitle, description, activities, technologies} = req.body;
+app.post('/endpoint/set-career/v1/:id', function(req, res, next) {
+  const { id } = req.params;
+  const { title, date, subtitle, description, activities, technologies } = req.body;
   const params = {
     id,
     date,
@@ -106,8 +86,8 @@ app.post('/endpoint/set-career/v1/:id', function (req, res, next) {
     })
 });
 
-app.post('/endpoint/new-set-career/v1', function (req, res, next) {
-  const {title, date, subtitle, description, activities, technologies} = req.body;
+app.post('/endpoint/new-set-career/v1', function(req, res, next) {
+  const { title, date, subtitle, description, activities, technologies } = req.body;
   const params = {
     date,
     title,
@@ -127,8 +107,8 @@ app.post('/endpoint/new-set-career/v1', function (req, res, next) {
 
 });
 
-app.get('/endpoint/delete-set-career/v1/:id', function (req, res, next) {
-  const {id} = req.params;
+app.get('/endpoint/delete-set-career/v1/:id', function(req, res, next) {
+  const { id } = req.params;
   deleteDataFromDB('career', id)
     .then((response) => {
       if (response) {
@@ -149,7 +129,7 @@ app.get('/health', function(req, res) {
 });
 
 app.listen(port, () => {
-  console.log(`Server is running on http://${host}:${port}`);
+ console.log(`Server is running on http://${host}:${port}`);
 });
 
 // Export the app object. When executing the application local this does nothing. However,

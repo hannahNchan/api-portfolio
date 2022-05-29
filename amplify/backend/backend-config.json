@@ -8,7 +8,7 @@
   },
   "auth": {},
   "api": {
-    "hannahPortfolioApi": {
+    "hannahPortfolioApi${project-env}": {
       "service": "API Gateway",
       "providerPlugin": "awscloudformation",
       "dependsOn": [

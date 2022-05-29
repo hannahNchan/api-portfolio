@@ -1,6 +1,6 @@
 {
   "AWSTemplateFormatVersion": "2010-09-09",
-  "Description": "Lambda Function resource stack creation using Amplify CLI",
+  "Description": "{\"createdOn\":\"Linux\",\"createdBy\":\"Amplify\",\"createdWith\":\"8.3.1\",\"stackType\":\"function-Lambda\",\"metadata\":{}}",
   "Parameters": {
     "CloudWatchRule": {
       "Type": "String",
@@ -89,12 +89,12 @@
         "RoleName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "hannahportfolioapiLambdaRolec54a0a85",
+            "hannahportfolioapiLambdaRole39acf311",
             {
               "Fn::Join": [
                 "",
                 [
-                  "hannahportfolioapiLambdaRolec54a0a85",
+                  "hannahportfolioapiLambdaRole39acf311",
                   "-",
                   {
                     "Ref": "env"
