@@ -9,9 +9,12 @@
     "express": "^4.17.1",
     "nodemon": "^2.0.12",
     "sqlite3": "^5.0.2",
-    "url": "^0.11.0"
+    "url": "^0.11.0",
+    "aws-serverless-express": "^3.3.5"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.92"
+  },
   "scripts": {
     "test": "node test",
     "start": "NODE_ENV=develop nodemon index.js",

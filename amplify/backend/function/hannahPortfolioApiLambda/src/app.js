@@ -120,6 +120,19 @@ app.get('/endpoint/delete-set-career/v1/:id', function(req, res, next) {
 
 });
 
+app.get('/', function(req, res) {
+  res.json({success: 'get call succeed!', url: req.url});
+});
+
+app.get('/health', function(req, res) {
+  res.json({success: 'Api is Healthy!', url: req.url});
+});
+
 app.listen(port, () => {
  console.log(`Server is running on http://${host}:${port}`);
 });
+
+// Export the app object. When executing the application local this does nothing. However,
+// to port it to AWS Lambda we will create a wrapper around that will load the app from
+// this file
+module.exports = app
